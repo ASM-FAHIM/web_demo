@@ -2,12 +2,14 @@ import 'package:web_project/utils/enum.dart';
 
 enum AppUrl {
   base,
+  last,
   baseImage,
 
 }
 
 extension AppUrlExtention on AppUrl {
-  static String _baseUrl = "";
+  static String _baseUrl = "https://jsonplaceholder.typicode.com";
+  static String _lastUrl = "/photos/";
   static String _baseImageUrl = "";
 
   static void setUrl(UrlLink urlLink) {

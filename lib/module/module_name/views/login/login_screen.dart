@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:web_project/global/widget/global_button.dart';
+import 'package:get/get.dart';
+import 'package:web_project/module/module_name/views/dashboard/dashboard_screen.dart';
 
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +85,25 @@ class DashboardScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "Incentive applicable",
+                              "Remember me",
                             ),
                           ],
                         ),
-                        Text('Forget password ?')
+                        Spacer(),
+                        Text('Forget password ?'),
                       ],
+                    ),
+
+                    SizedBox(height: 20,),
+                    Container(
+                      width: 220,
+                      child: GlobalButton(
+                          onPressed: (){
+                            Get.to(()=> MainScreen());
+                            //Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
+                          },
+                          buttonText: 'Login',
+                      ),
                     )
                   ],
                 ),

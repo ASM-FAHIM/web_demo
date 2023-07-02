@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 //localization
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:web_project/constant/app_url.dart';
-import 'package:web_project/constant/constant_key.dart';
 import 'package:web_project/data_provider/pref_helper.dart';
-import 'package:web_project/module/module_name/views/screen_name.dart';
+import 'package:web_project/module/module_name/views/login/login_screen.dart';
 import 'package:web_project/utils/app_version.dart';
 import 'package:web_project/utils/enum.dart';
 import 'package:web_project/utils/navigation.dart';
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 800),
       minTextAdapt: true,
       builder: (ctx, child) {
-        return MaterialApp(
+        return GetMaterialApp(
           title: 'web_project',
           navigatorKey: Navigation.key,
           debugShowCheckedModeBanner: false,
@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: DashboardScreen()
+      child: LoginScreen()
     );
   }
 }

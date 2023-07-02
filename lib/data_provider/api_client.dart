@@ -147,7 +147,7 @@ class ApiClient {
       );
       if (ViewUtil.isPresentedDialog == false) {
         ViewUtil.isPresentedDialog = true;
-        WidgetsBinding.instance?.addPostFrameCallback(
+        WidgetsBinding.instance.addPostFrameCallback(
           (_) {
             ViewUtil.showInternetDialog(
               onPressed: () {
