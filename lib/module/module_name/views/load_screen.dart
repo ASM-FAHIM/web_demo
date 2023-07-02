@@ -56,6 +56,7 @@ class _LoadScreenState extends State<LoadScreen> {
                     leading: Container(
                       width: 65,
                       decoration: BoxDecoration(
+                        color: Colors.blue,
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
                           fit: BoxFit.cover,
@@ -72,7 +73,7 @@ class _LoadScreenState extends State<LoadScreen> {
                     textColor: Colors.black,
                   ),
                   Container(
-                    width: size.width / 1.5,
+                    width: size.width / 1.2,
                     child: Divider(
                       thickness: 1.2,
                       color: Colors.grey,
