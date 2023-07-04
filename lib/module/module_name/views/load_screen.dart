@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 
 import '../controller/home_controller.dart';
 
-class LoadScreen extends StatefulWidget {
-  const LoadScreen({Key? key}) : super(key: key);
+class RegisteredPatient extends StatefulWidget {
+  const RegisteredPatient({Key? key}) : super(key: key);
 
   @override
-  State<LoadScreen> createState() => _LoadScreenState();
+  State<RegisteredPatient> createState() => _RegisteredPatientState();
 }
 
-class _LoadScreenState extends State<LoadScreen> {
+class _RegisteredPatientState extends State<RegisteredPatient> {
   HomeController home = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class _LoadScreenState extends State<LoadScreen> {
                     title: Row(
                       children: [
                         Text('$id. '),
-                        Text(title),
+                        Expanded(child: Text(title)),
                       ],
                     ),
                     textColor: Colors.black,

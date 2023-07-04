@@ -11,13 +11,13 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   final List<Tab> myTabs = <Tab>[
     Tab(
-      child: Text('Api load', style: TextStyle(color: Colors.grey)),
+      child: Text('New register', style: TextStyle(color: Colors.grey)),
         ),
     Tab(
-      child: Text('Regi form', style: TextStyle(color: Colors.grey)),
+      child: Text('Registered patient', style: TextStyle(color: Colors.grey)),
     ),
     Tab(
-      child: Text('Cart page', style: TextStyle(color: Colors.grey)),
+      child: Text('Logout', style: TextStyle(color: Colors.grey)),
     )
   ];
 
