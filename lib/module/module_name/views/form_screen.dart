@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../global/widget/global_button.dart';
 
 class NewRegister extends StatefulWidget {
@@ -10,11 +13,36 @@ class NewRegister extends StatefulWidget {
 }
 
 class _NewRegisterState extends State<NewRegister> {
+  late Uint8List selectedImgInBytes;
+  String selectedFile = '';
+  late XFile file;
+  List<Uint8List> pickedImagesInBytes = [];
+  List<String> imageUrls = [];
+  int imageCounts = 0;
+
+  _selectFile(bool imageFrom) async {
+    FilePickerResult? fileResult =
+    await FilePicker.platform.pickFiles(allowMultiple: true);
+
+    if (fileResult != null) {
+      selectedFile = fileResult.files.first.name;
+      fileResult.files.forEach((element) {
+        setState(() {
+          pickedImagesInBytes.add(element.bytes!);
+          selectedImgInBytes = fileResult.files.first.bytes!;
+          imageCounts += 1;
+        });
+      });
+    }
+    print(selectedFile);
+  }
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -22,14 +50,14 @@ class _NewRegisterState extends State<NewRegister> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Personal Information',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   SingeInfoField(
                     title: 'Patient record number :',
                     hintText: 'Enter number',
@@ -42,14 +70,52 @@ class _NewRegisterState extends State<NewRegister> {
                     title: 'Husband/Father\'s name :',
                     hintText: 'Enter name',
                   ),
-                  SingeInfoField(
-                    title: 'Select image :',
-                    hintText: 'Enter image',
-                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Container(
+                        width: size.width / 6,
+                        child: const Text(
+                          'Profile image :',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      SizedBox(
+                        height: size.height / 24,
+                        width: size.width / 10,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            debugPrint('Image clicked');
+                            _selectFile(true);
+                          },
+                          style:
+                          ElevatedButton.styleFrom(primary: const Color(0xffECF0E6)),
+                          child: const Text(
+                            'Choose File',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Container(
+                          child: Text(
+                            selectedFile == '' ? 'No image selected' : selectedFile,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
@@ -57,14 +123,14 @@ class _NewRegisterState extends State<NewRegister> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Address Details',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   SingeInfoField(
                     title: 'District :',
                     hintText: 'Enter district',
@@ -84,7 +150,7 @@ class _NewRegisterState extends State<NewRegister> {
                 ],
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
@@ -92,14 +158,14 @@ class _NewRegisterState extends State<NewRegister> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Contact',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   SingeInfoField(
                     title: 'Phone #1 :',
                     hintText: 'Enter phone number',
@@ -115,7 +181,7 @@ class _NewRegisterState extends State<NewRegister> {
                 ],
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
@@ -123,14 +189,14 @@ class _NewRegisterState extends State<NewRegister> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Others',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   SingeInfoField(
                     title: 'Marital status :',
                     hintText: 'dropdown should be here',
@@ -170,7 +236,7 @@ class _NewRegisterState extends State<NewRegister> {
                 ],
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
@@ -210,14 +276,14 @@ class SingeInfoField extends StatelessWidget {
           width: size.width / 6,
           child: Text(
             title,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Expanded(
           child: TextFormField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               hintText: hintText,
             ),
           ),
